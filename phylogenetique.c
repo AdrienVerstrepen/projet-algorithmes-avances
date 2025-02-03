@@ -8,12 +8,12 @@ void lire_caractere() {
 	printf("%c", mon_caractere);
 }
 
-int est_espace() {
+int est_separateur() {
 	return  mon_caractere == ' ' || mon_caractere == '\t' || mon_caractere == '\n' || mon_caractere == '\r';
 }
 
-void passer_espace() {
-	while(est_espace(mon_caractere)){
+void separation() {
+	while(est_separateur(mon_caractere)){
 		lire_caractere(mon_caractere);
 	}
 }
@@ -21,7 +21,7 @@ void passer_espace() {
 void amorcer_lecture(char* nom_fichier){
 	mon_fichier = fopen(nom_fichier, "r");
 	lire_caractere();
-	passer_espace();
+	separation();
 }
 
 void consommer_caractere(char attendu) {
