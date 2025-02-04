@@ -33,9 +33,7 @@ void consommer_caractere(char attendu) {
 }
 
 void arbre_phylogenetique() {
-	if (est_nomme()) {
-		nom();
-	} else {
+	if (est_parenthese()) {
 		consommer_caractere('(');
 		arbre_phylogenetique();
 		separation();
@@ -48,7 +46,9 @@ void arbre_phylogenetique() {
 		consommer_caractere(':');
 		nombre_a_virgule();
 		consommer_caractere(')');
-	}
+	} else {
+nom();
+}
 	
 }
 
