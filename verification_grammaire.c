@@ -6,7 +6,6 @@ char mon_caractere;
 int cpt = 0;
 
 void lire_caractere() {
-	cpt++;
 	mon_caractere = fgetc(mon_fichier);  // Permet de lire un caractère de mon fichier
 	printf("%c", mon_caractere);
 }
@@ -16,22 +15,26 @@ void amorcer_lecture(char* nom_fichier){
 	lire_caractere();
 }
 
-int est_separateur() {
-	return  mon_caractere == ' ' || mon_caractere == '\t' || mon_caractere == '\n' || mon_caractere == '\r';
-}
-
-void separation() {
-	while(est_separateur(mon_caractere)){
-		lire_caractere(mon_caractere);
-	}
-}
-
 void consommer_caractere(char attendu) {
+	// cpt++;
+	// printf("consommation %d\n", cpt);
 	if(mon_caractere != attendu) {
 		printf("caractere n%d trouve : %c, caractere attendu : %c\n", cpt, mon_caractere, attendu);
 		exit(-1);
 	}
 	lire_caractere(mon_caractere);
+}
+
+int est_separateur() {
+	return  mon_caractere == ' ' || mon_caractere == '\t' || mon_caractere == '\n' || mon_caractere == '\r';
+}
+
+void separation() {
+	while(est_separateur()){
+		// cpt++;
+		// printf("<<<consommation separation%d\n", cpt);
+		consommer_caractere(mon_caractere);
+	}
 }
 
 int est_nul() {
@@ -56,6 +59,7 @@ int est_chiffre() {
 
 void chiffre_non_nul() {
 	if (est_chiffre_non_nul()) {
+		// printf(">>>chiffre non nul : %c\n", mon_caractere);
 		consommer_caractere(mon_caractere);
 	} else {
 		printf("chiffre non nul attendu caractere trouve : [%c]", mon_caractere);
@@ -102,27 +106,26 @@ void nombre_a_virgule() {
 }
 
 int est_lettre_min() {
-	return 'a' <= mon_caractere <= 'z';
+	return 'a' <= mon_caractere && mon_caractere <= 'z';
 }
 
 int est_lettre_maj() {
-	return 'A' <= mon_caractere <= 'Z';
-}
-
-void lettre() {
-	if(est_lettre_min() || est_lettre_maj()) {
-		consommer_caractere(mon_caractere);
-	} else {
-		printf("Erreur lettre attendu caractere trouve : [%c]\n", mon_caractere);
-	}
+	return 'A' <= mon_caractere && mon_caractere <= 'Z';
 }
 
 int est_lettre() {
 	return est_lettre_min() || est_lettre_maj();
 }
 
+void lettre() {
+	if(est_lettre()) {
+		consommer_caractere(mon_caractere);
+	} else {
+		printf("Erreur lettre attendu caractere trouve : [%c]\n", mon_caractere);
+	}
+}
+
 void mot() {
-	printf("\n entree mot\n");
 	while(est_lettre() && mon_caractere != EOF) {
 		lettre();
 	}
@@ -130,10 +133,9 @@ void mot() {
 
 void nom() {
 	mot();
-	printf("sortie mot");
-	while( mon_caractere == '_') {
+	while (mon_caractere == '_') {
 		consommer_caractere('_');
-		// mot();
+		mot();
 	}
 }
 
@@ -143,23 +145,24 @@ void arbre_phylogenetique() {
 		arbre_phylogenetique();
 		separation();
 		consommer_caractere(':');
-		cpt++;
 		separation();
+		// printf("\nNOMBRE A VIRGULE AVANT ,\n");
+		printf("\n NOMBRE A VIRGULE \n");
 		nombre_a_virgule();
+		printf("\n VIRGULE \n");
 		consommer_caractere(',');
 		separation();
 		arbre_phylogenetique();
 		separation();
 		consommer_caractere(':');
-		cpt++;
 		separation();
+		// printf("\nNOMBRE A VIRGULE AVANT PARENTHESE\n");
+		printf("\n NOMBRE A VIRGULE \n");
 		nombre_a_virgule();
+		printf("\n parenthese \n");
 		consommer_caractere(')');
-	} else if (mon_caractere != EOF) {
+	} else /*if (mon_caractere != EOF)*/ {
 		nom();
-	} else {
-		printf("\n AU SECOURS\n");
-		exit(-1);
 	}
 }
 
