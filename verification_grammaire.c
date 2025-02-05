@@ -146,20 +146,15 @@ void arbre_phylogenetique() {
 		separation();
 		consommer_caractere(':');
 		separation();
-		// printf("\nNOMBRE A VIRGULE AVANT ,\n");
-		printf("\n NOMBRE A VIRGULE \n");
+		printf("\t NOMBRE A VIRGULE AVANT VIRGULE : ");
 		nombre_a_virgule();
-		printf("\n VIRGULE \n");
 		consommer_caractere(',');
 		separation();
 		arbre_phylogenetique();
 		separation();
 		consommer_caractere(':');
 		separation();
-		// printf("\nNOMBRE A VIRGULE AVANT PARENTHESE\n");
-		printf("\n NOMBRE A VIRGULE \n");
 		nombre_a_virgule();
-		printf("\n parenthese \n");
 		consommer_caractere(')');
 	} else /*if (mon_caractere != EOF)*/ {
 		nom();
