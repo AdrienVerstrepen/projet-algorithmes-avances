@@ -6,6 +6,7 @@ char mon_caractere;
 int cpt = 0;
 
 void lire_caractere() {
+	cpt++;
 	mon_caractere = fgetc(mon_fichier);  // Permet de lire un caractère de mon fichier
 	printf("%c", mon_caractere);
 }
@@ -27,7 +28,7 @@ void separation() {
 
 void consommer_caractere(char attendu) {
 	if(mon_caractere != attendu) {
-		printf("caractere trouve : %c, caractere attendu : %c\n", mon_caractere, attendu);
+		printf("caractere n%d trouve : %c, caractere attendu : %c\n", cpt, mon_caractere, attendu);
 		exit(-1);
 	}
 	lire_caractere(mon_caractere);
@@ -76,7 +77,6 @@ void sequence_de_chiffres() {
 		// nombre *= 10;
 		// nombre += mon_caractere - '0';
 		chiffre();
-		consommer_caractere(mon_caractere);
 	}
 }
 
@@ -110,11 +110,7 @@ int est_lettre_maj() {
 }
 
 void lettre() {
-	if (mon_caractere == EOF) {
-		printf("ALEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEED");
-		exit(-1);
-	} else if(est_lettre_min() || est_lettre_maj()) {
-		// cpt++;
+	if(est_lettre_min() || est_lettre_maj()) {
 		consommer_caractere(mon_caractere);
 	} else {
 		printf("Erreur lettre attendu caractere trouve : [%c]\n", mon_caractere);
@@ -126,17 +122,18 @@ int est_lettre() {
 }
 
 void mot() {
+	printf("\n entree mot\n");
 	while(est_lettre() && mon_caractere != EOF) {
-		printf("\n [%d]\n", cpt);
 		lettre();
 	}
 }
 
 void nom() {
 	mot();
-	while(est_lettre() && mon_caractere != EOF) {
-		consommer_caractere(' ');
-		mot();
+	printf("sortie mot");
+	while( mon_caractere == '_') {
+		consommer_caractere('_');
+		// mot();
 	}
 }
 
