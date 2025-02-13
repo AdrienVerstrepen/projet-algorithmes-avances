@@ -146,7 +146,6 @@ void arbre_phylogenetique() {
 		separation();
 		consommer_caractere(':');
 		separation();
-		printf("\t NOMBRE A VIRGULE AVANT VIRGULE : ");
 		nombre_a_virgule();
 		consommer_caractere(',');
 		separation();
@@ -162,9 +161,8 @@ void arbre_phylogenetique() {
 }
 
 int main() {
-	amorcer_lecture("exemples/exemple_correct_1.phy");
+	amorcer_lecture("exemples/exemple_correct_1b.phy");
 	arbre_phylogenetique();
-	printf("nombre de : [%d]", cpt);
 	fclose(mon_fichier);
 	return 0;
 }
