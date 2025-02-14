@@ -161,7 +161,7 @@ void arbre_phylogenetique() {
 }
 
 int main() {
-	amorcer_lecture("exemples/exemple_correct_1b.phy");
+	amorcer_lecture("exemples/exemple_correct_1c.phy");
 	arbre_phylogenetique();
 	fclose(mon_fichier);
 	return 0;
