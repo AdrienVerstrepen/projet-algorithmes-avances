@@ -16,8 +16,6 @@ void amorcer_lecture(char* nom_fichier){
 }
 
 void consommer_caractere(char attendu) {
-	// cpt++;
-	// printf("consommation %d\n", cpt);
 	if(mon_caractere != attendu) {
 		printf("caractere n%d trouve : %c, caractere attendu : %c\n", cpt, mon_caractere, attendu);
 		exit(-1);
@@ -31,8 +29,6 @@ int est_separateur() {
 
 void separation() {
 	while(est_separateur()){
-		// cpt++;
-		// printf("<<<consommation separation%d\n", cpt);
 		consommer_caractere(mon_caractere);
 	}
 }
@@ -59,7 +55,6 @@ int est_chiffre() {
 
 void chiffre_non_nul() {
 	if (est_chiffre_non_nul()) {
-		// printf(">>>chiffre non nul : %c\n", mon_caractere);
 		consommer_caractere(mon_caractere);
 	} else {
 		printf("chiffre non nul attendu caractere trouve : [%c]", mon_caractere);
@@ -155,7 +150,7 @@ void arbre_phylogenetique() {
 		separation();
 		nombre_a_virgule();
 		consommer_caractere(')');
-	} else /*if (mon_caractere != EOF)*/ {
+	} else {
 		nom();
 	}
 }
