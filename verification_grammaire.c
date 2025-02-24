@@ -9,6 +9,7 @@ int cpt = 0;
 void lire_caractere() {
 	mon_caractere = fgetc(mon_fichier);
 	printf("%c", mon_caractere);
+	cpt++;
 }
 
 // on ouvre le fichier à lire en mode lecture car on n'effectue pas d'écriture sur ce fichier là
@@ -22,7 +23,7 @@ void amorcer_lecture(char* nom_fichier){
 void consommer_caractere(char attendu) {
 	// on traite le cas où le caractère trouvé ne correspond pas en faisant un affichage du caractère qui pose problème et en forçant un exit
 	if(mon_caractere != attendu) {
-		printf("caractere n%d trouve : %c, caractere attendu : %c\n", cpt, mon_caractere, attendu);
+		printf("\ncaractere n %d trouve : %c, caractere attendu : %c\n", cpt, mon_caractere, attendu);
 		exit(-1);
 	}
 	lire_caractere(mon_caractere);
@@ -66,7 +67,7 @@ void chiffre_non_nul() {
 		consommer_caractere(mon_caractere);
 	} else {
 		// cas où le caractère que l'on a trouvé ne correspond pas à un caractère non nul
-		printf("chiffre non nul attendu caractere trouve : [%c]", mon_caractere);
+		printf("\nchiffre non nul attendu caractere trouve : [%c]", mon_caractere);
 		exit(-1);
 	}
 }
@@ -131,7 +132,7 @@ void lettre() {
 	if(est_lettre()) {
 		consommer_caractere(mon_caractere);
 	} else {
-		printf("Erreur lettre attendu caractere trouve : [%c]\n", mon_caractere);
+		printf("\nErreur lettre attendu caractere trouve : [%c]\n", mon_caractere);
 	}
 }
 
@@ -154,6 +155,7 @@ void nom() {
 // un arbre phylogénétique est composé d'un nom ou d'une combinaison de paranthèses, de : pour indiquer les distances ainsi que des noms des espèces, ce qui donne ce genre d'arbre (Homo_sapiens:0.1, Felis_catus:0.2)
 // les arbres phylogénétiques peuvent être entièrement imbriqués
 void arbre_phylogenetique() {
+	// printf("\npassage arbre\n");
 	if (est_par_ouvr()) {
 		consommer_caractere('(');
 		arbre_phylogenetique();
@@ -177,7 +179,8 @@ void arbre_phylogenetique() {
 // on appelle la fonction principale
 int main() {
 	// on indique ici le document à utiliser
-	amorcer_lecture("exemples/exemple_correct_1.phy");
+	// amorcer_lecture("exemples/exemple_correct_1.phy");
+	amorcer_lecture("exemples/test_corrige_1.phy");
 	arbre_phylogenetique();
 	fclose(mon_fichier);
 	return 0;
