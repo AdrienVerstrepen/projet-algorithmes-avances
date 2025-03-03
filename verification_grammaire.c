@@ -179,13 +179,13 @@ void arbre_phylogenetique() {
 // on appelle la fonction principale
 int main() {
 	// on indique ici le document à utiliser
-	// amorcer_lecture("exemples/exemple_correct_1.phy");
-	amorcer_lecture("exemples/test_corrige_1.phy");
+	amorcer_lecture("exemples/exemple_correct_1d.phy");
+	// amorcer_lecture("exemples/test_corrige_1.phy");
 	arbre_phylogenetique();
 
-	amorcer_lecture("exemples/exemple_correct_2_test.phy");
-	// cette fonction va vérifier que l'arbre donné est bien du bon format
-	arbre_phylogenetique();
+	// amorcer_lecture("exemples/exemple_correct_2_test.phy");
+	// // cette fonction va vérifier que l'arbre donné est bien du bon format
+	// arbre_phylogenetique();
 	fclose(mon_fichier);
 	return 0;
 }
