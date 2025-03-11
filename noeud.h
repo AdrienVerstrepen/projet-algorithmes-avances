@@ -18,6 +18,7 @@ typedef struct noeud {
     t_noeud *espece_gauche;
     t_noeud *espece_droite;
     int est_espece;
+    int est_racine;
 } t_noeud;
 
 typedef t_noeud* a_noeud;
@@ -35,5 +36,7 @@ a_noeud nouveau_noeud_espece(t_nom_espece nom_espece, t_distance distance);
 void liberer_noeud(a_noeud ceci);
 
 int est_espece(a_noeud ceci);
+
+int est_racine(a_noeud ceci);
 
 #endif
