@@ -16,6 +16,6 @@ int main() {
 	// amorcer_lecture("exemples/exemple_correct_2_test.phy");
 	// // cette fonction va vérifier que l'arbre donné est bien du bon format
 	// arbre_phylogenetique();
-	fclose(mon_fichier);
+	fermer_fichier(mon_fichier);
 	return 0;
 }

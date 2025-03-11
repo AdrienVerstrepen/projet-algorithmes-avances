@@ -28,7 +28,8 @@ void consommer_caractere(char attendu) {
 		printf("\ncaractere n %d trouve : %c, caractere attendu : %c\n", cpt, mon_caractere, attendu);
 		exit(-1);
 	}
-	lire_caractere(mon_caractere);
+	// lire_caractere(mon_caractere);
+	lire_caractere();
 }
 
 // on vérifie qu'on a bien un des caractères que l'on classifie comme séparateur là où l'on regarde
@@ -178,3 +179,6 @@ void arbre_phylogenetique() {
 	}
 }
 
+void fermer_fichier(mon_fichier){
+    fclose(mon_fichier);
+}

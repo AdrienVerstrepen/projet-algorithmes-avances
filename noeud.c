@@ -10,7 +10,7 @@ void initialiser_noeud(t_noeud* ceci, char* chaine, double distance) {
     }
 
     if (chaine != NULL) {
-        ceci->l_espece = malloc(strlen(chaine));
+        ceci->l_espece = malloc(strlen(chaine)+1);
         if (ceci->l_espece != NULL) {
             strcpy(ceci->l_espece, chaine);
         }
@@ -42,14 +42,25 @@ void copier_noeud(t_noeud* ceci, t_noeud* cela) {
     if (ceci == NULL || cela == NULL) {
         return;
     }
-
-    cela->la_distance = ceci->la_distance;
+    if (ceci->est_espece) {
+        initialiser_noeud(cela, ceci->l_espece, ceci->la_distance);
+    } else {
+        initialiser_noeud(cela, NULL, ceci->la_distance);
+    }
     cela->est_espece = ceci->est_espece;
-    cela->espece_gauche = ceci->espece_gauche;
-    cela->espece_droite = ceci->espece_droite;
 
-    if (ceci->est_espece && ceci->l_espece != NULL && cela->l_espece != NULL) {
-        strcpy(cela->l_espece, ceci->l_espece);
+    if (ceci->espece_gauche != NULL) {
+        cela->espece_gauche = (t_noeud*)malloc(sizeof(t_noeud));
+        if (cela->espece_gauche != NULL) {
+            copier_noeud(ceci->espece_gauche, cela->espece_gauche);
+        }
+    }
+
+    if (ceci->espece_droite != NULL) {
+        cela->espece_droite = (t_noeud*)malloc(sizeof(t_noeud));
+        if (cela->espece_droite != NULL) {
+            copier_noeud(ceci->espece_droite, cela->espece_droite);
+        }
     }
 }
 
@@ -76,13 +87,6 @@ a_noeud nouveau_noeud_espece(t_nom_espece nom_espece, t_distance distance) {
     noeud->espece_droite = NULL;
 
     return noeud;
-}
-
-void liberer_noeud(a_noeud ceci) {
-    if (ceci == NULL) {
-        return;
-    }
-    liberer_noeud(ceci);
 }
 
 int est_espece(a_noeud ceci) {
