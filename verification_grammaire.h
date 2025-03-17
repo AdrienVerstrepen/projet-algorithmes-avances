@@ -3,7 +3,8 @@
 #include "noeud.h"
 
 // j'avais des gros soucis d'imports de fonction entre cette partie et la suite donc je me suis permis de faire ce fichier là
-char mon_caractere;
+// char mon_caractere;
+extern FILE* mon_fichier;
 
 void lire_caractere();
 

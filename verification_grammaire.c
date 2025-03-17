@@ -1,9 +1,9 @@
 #include <stdio.h> // pour lire le fichier
 #include <stdlib.h> // pour avoir exit();
 #include <string.h> 
-#include "noeud.h"
-#include "arbre_binaire.h"
-#include "verification_grammaire.h"
+// #include "noeud.h"
+// #include "arbre_binaire.h"
+// #include "verification_grammaire.h"
 FILE* mon_fichier;
 char mon_caractere;
 int cpt = 0;

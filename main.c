@@ -3,8 +3,8 @@
 #include "verification_grammaire.h"
 // #include "noeud.h"
 // #include "arbre_binaire.h"
-FILE* mon_fichier;
-char mon_caractere;
+// FILE* mon_fichier;
+// char mon_caractere;
 
 // on appelle la fonction principale
 int main() {
