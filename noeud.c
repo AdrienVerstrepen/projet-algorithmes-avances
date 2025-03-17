@@ -27,20 +27,6 @@ void initialiser_noeud(t_noeud* ceci, char* chaine) {
     ceci->espece_droite = NULL;
 }
 
-// void liberer_noeud(a_noeud ceci) {
-//     if (ceci == NULL) {
-//         return;
-//     }
-
-//     liberer_noeud(ceci->espece_gauche);
-//     liberer_noeud(ceci->espece_droite);
-//     if (ceci->est_espece && ceci->l_espece != NULL) {
-//         free(ceci->l_espece);
-//     }
-
-//     free(ceci);
-// }
-
 void liberer_noeud(a_noeud ceci) {
     if (ceci == NULL) {
         return;
@@ -52,7 +38,6 @@ void liberer_noeud(a_noeud ceci) {
 
     free(ceci);
 }
-
 
 // on considère que les deux existent déjà
 void copier_noeud(t_noeud* ceci, t_noeud* cela) {

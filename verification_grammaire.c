@@ -48,10 +48,8 @@ void consommer_caractere_sans_affichage(char attendu) {
 		printf("\ncaractere n %d trouve : %c, caractere attendu : %c\n", cpt, mon_caractere, attendu);
 		exit(-1);
 	}
-	// printf("%c", mon_caractere);
 	lire_caractere_sans_affichage();
 }
-
 
 // on vérifie qu'on a bien un des caractères que l'on classifie comme séparateur là où l'on regarde
 // si cela n'est pas le cas, ça veut dire que le fichier ne suit pas notre grammaire

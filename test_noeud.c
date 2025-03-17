@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h> 
 #include "noeud.h"
-// #include "arbre_binaire.h"
-// #include "verification_grammaire.h"
 
 int main() {
     t_noeud* noeud1 = (t_noeud*)malloc(sizeof(t_noeud));

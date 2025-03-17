@@ -20,6 +20,8 @@ a_noeud construire_arbre_phylogenetique();
 
 void afficher_arbre(a_noeud ceci);
 
-// char* recuperer_nom_espece();
+char* recuperer_nom();
+
+double recuperer_nombre_a_virgule();
 
 #endif

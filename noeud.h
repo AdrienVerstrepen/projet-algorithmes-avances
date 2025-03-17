@@ -1,7 +1,5 @@
 #ifndef NOEUD_H
 #define NOEUD_H
-// si je décommente ça, ça bug, donc on va laisser
-// #include "verification_grammaire.h"
 
 // on utilise un type char* pour le nom de l'espece
 typedef char* t_nom_espece;
