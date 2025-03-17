@@ -16,7 +16,7 @@ void detruire_arbre_binaire(a_noeud ceci);
 
 void finaliser_arbre_binaire(a_noeud* ceci);
 
-// a_noeud construire_arbre_phylogenetique();
+a_noeud construire_arbre_phylogenetique();
 
 void afficher_arbre(a_noeud ceci);
 

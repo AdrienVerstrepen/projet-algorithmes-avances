@@ -4,6 +4,7 @@
 #include "noeud.h"
 #include "arbre_binaire.h"
 #include "verification_grammaire.h"
+extern char mon_caractere;
 
 // on a une fonction pour regarder si un arbre est vide ou non
 int est_arbre_vide(a_noeud ceci){
@@ -138,7 +139,7 @@ void finaliser_arbre_binaire(a_noeud* ceci){
 
 //         return nouveau_arbre_binaire(distance_gauche, distance_droit, NULL, gauche, droite, 0);
 //     } else {
-//         t_nom_espece nom_espece = recuperer_nom_espece();
+//         t_nom_espece nom_espece = nom();
         
 //         a_noeud espece = (a_noeud)malloc(sizeof(t_noeud));
 //         initialiser_noeud(espece, nom_espece);
@@ -148,6 +149,205 @@ void finaliser_arbre_binaire(a_noeud* ceci){
 //         return espece;
 //     }
 // }
+
+// double recuperer_nombre_a_virgule() {
+//     char buffer[50];
+//     int i = 0;
+    
+//     while (mon_caractere != ',' && mon_caractere != ' ' && mon_caractere != ')') {
+//         buffer[i++] = mon_caractere;
+//         lire_caractere();
+//     }
+//     buffer[i] = '\0';
+
+//     return strtod(buffer, NULL);
+// }
+
+// double recuperer_nombre_a_virgule() {
+//     char buffer[50];
+//     int i = 0;
+    
+//     while (mon_caractere != ',' && mon_caractere != ' ' && mon_caractere != ')') {
+//         buffer[i++] = mon_caractere;
+//         lire_caractere_sans_affichage();
+//     }
+//     buffer[i] = '\0';
+
+//     while (mon_caractere == ' ' || mon_caractere == '\t' || mon_caractere == '\n') {
+//         lire_caractere_sans_affichage();
+//     }
+
+//     return strtod(buffer, NULL);
+// }
+
+// double recuperer_nombre_a_virgule() {
+//     double resultat = 0.0;
+//     double facteur = 1.0;
+//     int partie_decimale = 0;
+
+//     while (mon_caractere != ',' && mon_caractere != ' ' && mon_caractere != ')') {
+//         if (mon_caractere >= '0' && mon_caractere <= '9') {
+//             resultat = resultat * 10 + (mon_caractere - '0');
+//         }
+//         else if (mon_caractere == '.') {
+//             partie_decimale = 1;
+//         }
+//         else if (partie_decimale && mon_caractere >= '0' && mon_caractere <= '9') {
+//             facteur /= 10.0;
+//             resultat += (mon_caractere - '0') * facteur;
+//         }
+//         // printf("%c", mon_caractere);
+
+//         lire_caractere_sans_affichage();
+//     }
+
+//     while (mon_caractere == ' ' || mon_caractere == '\t' || mon_caractere == '\n') {
+//         lire_caractere_sans_affichage();
+//     }
+
+//     printf("%d", resultat);
+
+//     return resultat;
+// }
+
+double recuperer_nombre_a_virgule() {
+    double resultat = 0.0;
+    double facteur = 1.0;
+    int partie_decimale = 0;
+
+    while (mon_caractere != ',' && mon_caractere != ' ' && mon_caractere != ')' && mon_caractere != '\t' && mon_caractere != '\n' && mon_caractere != '\r') {
+        if (mon_caractere >= '0' && mon_caractere <= '9') {
+            if (partie_decimale) {
+                facteur /= 10.0;
+                resultat += (mon_caractere - '0') * facteur;
+            } else {
+                resultat = resultat * 10 + (mon_caractere - '0');
+            }
+        } else if (mon_caractere == '.') {
+            partie_decimale = 1;
+        }
+
+        lire_caractere_sans_affichage();
+    }
+
+    while (mon_caractere == ' ' || mon_caractere == '\t' || mon_caractere == '\n' || mon_caractere == '\r') {
+        lire_caractere_sans_affichage();
+    }
+
+    // printf("%.2f", resultat);
+
+    return resultat;
+}
+
+// double recuperer_nombre_a_virgule() {
+//     double resultat = 0.0;
+//     double facteur = 1.0;
+//     int partie_decimale = 0;
+
+//     lire_caractere_sans_affichage(); // Lire le premier caractère
+
+//     while (mon_caractere != ',' && mon_caractere != ' ' && mon_caractere != ')' && 
+//            mon_caractere != '\t' && mon_caractere != '\n' && mon_caractere != '\r' && 
+//            mon_caractere != EOF) {
+//         // printf("Lu : %c\n", mon_caractere);  // Debug : Voir les caractères lus
+
+//         if (mon_caractere >= '0' && mon_caractere <= '9') {
+//             if (partie_decimale) {
+//                 facteur *= 0.1;
+//                 resultat += (mon_caractere - '0') * facteur;
+//             } else {
+//                 resultat = resultat * 10 + (mon_caractere - '0');
+//             }
+//         } else if (mon_caractere == '.' || mon_caractere == ',') { // Support des deux séparateurs
+//             partie_decimale = 1;
+//         }
+
+//         lire_caractere_sans_affichage();
+//     }
+
+//     // Ignorer les espaces et autres séparateurs restants
+//     while (mon_caractere == ' ' || mon_caractere == '\t' || mon_caractere == '\n' || 
+//            mon_caractere == '\r') {
+//         lire_caractere_sans_affichage();
+//     }
+
+//     printf("%.2f\n", resultat);  // Debug final
+
+//     return resultat;
+// }
+
+
+// char* recuperer_nom() {
+//     char buffer[100];
+//     int i = 0;
+
+//     while (mon_caractere != ' ' && mon_caractere != ':' && mon_caractere != '\n' && mon_caractere != '(' && mon_caractere != ',' && mon_caractere != EOF) {
+//         buffer[i++] = mon_caractere;
+//         lire_caractere_sans_affichage();
+//     }
+//     buffer[i] = '\0';  // Terminer la chaîne
+
+//     char* nom = (char*)malloc(i + 1);
+//     strcpy(nom, buffer);
+    
+//     return nom;
+// }
+
+char* recuperer_nom() {
+    char* nom = (char*)malloc(100 * sizeof(char));
+    int i = 0;
+
+    while (mon_caractere != ' ' && mon_caractere != ':' && mon_caractere != '\n' && mon_caractere != '(' && mon_caractere != ',' && mon_caractere != EOF) {
+        nom[i++] = mon_caractere;
+        // printf("%c", mon_caractere);
+        lire_caractere_sans_affichage();
+    }
+    nom[i] = '\0';
+
+    return nom;
+}
+
+a_noeud construire_arbre_phylogenetique() {
+    if (est_par_ouvr()) {
+        consommer_caractere_sans_affichage('(');
+        separation_sans_affichage();
+
+        a_noeud arbre_gauche = construire_arbre_phylogenetique();
+        separation_sans_affichage();
+        consommer_caractere_sans_affichage(':');
+        separation_sans_affichage();
+
+        t_distance distance_gauche = recuperer_nombre_a_virgule();
+
+        consommer_caractere_sans_affichage(',');
+        separation_sans_affichage();
+
+        a_noeud arbre_droite = construire_arbre_phylogenetique();
+        separation_sans_affichage();
+        consommer_caractere_sans_affichage(':');
+        separation_sans_affichage();
+
+        t_distance distance_droite = recuperer_nombre_a_virgule();
+        separation_sans_affichage();
+
+        consommer_caractere_sans_affichage(')');
+
+    //    if (mon_caractere == EOF) {
+    //         return NULL;
+    //     }
+        
+        return nouveau_arbre_binaire(distance_gauche, distance_droite, NULL, arbre_gauche, arbre_droite, 0);
+    } else {
+        t_nom_espece nom_espece = recuperer_nom();
+
+        a_noeud espece = (a_noeud)malloc(sizeof(t_noeud));
+        initialiser_noeud(espece, nom_espece);
+
+        espece->est_espece = 1;
+
+        return espece;
+    }
+}
 
 void afficher_arbre(a_noeud ceci) {
     if (ceci == NULL) {
@@ -172,7 +372,7 @@ void afficher_arbre(a_noeud ceci) {
     }
 }
 
-// char* recuperer_nom_espece() {
+// char* nom() {
 //     char* nom = malloc(100 * sizeof(char));
 //     int i = 0;
 
