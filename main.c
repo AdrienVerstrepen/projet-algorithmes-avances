@@ -1,8 +1,8 @@
 #include <stdio.h> // pour lire le fichier
 #include <stdlib.h> // pour avoir exit();
-#include "verification_grammaire.c"
-#include "noeud.h"
-#include "arbre_binaire.h"
+#include "verification_grammaire.h"
+// #include "noeud.h"
+// #include "arbre_binaire.h"
 FILE* mon_fichier;
 char mon_caractere;
 
@@ -16,6 +16,7 @@ int main() {
 	// amorcer_lecture("exemples/exemple_correct_2_test.phy");
 	// // cette fonction va vérifier que l'arbre donné est bien du bon format
 	// arbre_phylogenetique();
-	fermer_fichier(mon_fichier);
+	// fermer_fichier(mon_fichier);
+	fclose(mon_fichier);
 	return 0;
 }
