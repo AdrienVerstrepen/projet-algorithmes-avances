@@ -58,7 +58,10 @@ int main() {
 
 
     printf("\nArbre 3\n");
-    amorcer_lecture_sans_affichage("exemples/test_corrige_1.phy");
+    // amorcer_lecture_sans_affichage("exemples/test_corrige_1.phy");
+    // a_noeud arbre3 = construire_arbre_phylogenetique();
+    
+    amorcer_lecture_sans_affichage("exemples/exemple_correct_2_test.phy");
     a_noeud arbre3 = construire_arbre_phylogenetique();
 
     if (arbre3 == NULL) {
