@@ -95,11 +95,11 @@ double recuperer_nombre_a_virgule() {
         } else if (mon_caractere == '.') {
             partie_decimale = 1;
         }
-        lire_caractere_sans_affichage();
+        lire_caractere();
     }
     // on pense à bien enlever tous les caracrères transitoires comme les espaces ou les retours à la ligne
     while (mon_caractere == ' ' || mon_caractere == '\t' || mon_caractere == '\n' || mon_caractere == '\r') {
-        lire_caractere_sans_affichage();
+        lire_caractere();
     }
     return resultat;
 }
@@ -112,7 +112,7 @@ char* recuperer_nom() {
     // on va récupèrer chaque caractère tant que ce n'est pas un caractère de fin
     while (mon_caractere != ' ' && mon_caractere != ':' && mon_caractere != '\n' && mon_caractere != '(' && mon_caractere != ',' && mon_caractere != EOF) {
         nom[i++] = mon_caractere;
-        lire_caractere_sans_affichage();
+        lire_caractere();
     }
     nom[i] = '\0';
     return nom;
@@ -123,28 +123,28 @@ char* recuperer_nom() {
 a_noeud construire_arbre_phylogenetique() {
     if (est_par_ouvr()) {
         // on traite le cas d'un sous-arbre
-        consommer_caractere_sans_affichage('(');
-        separation_sans_affichage();
+        consommer_caractere('(');
+        separation();
 
         a_noeud arbre_gauche = construire_arbre_phylogenetique();
-        separation_sans_affichage();
-        consommer_caractere_sans_affichage(':');
-        separation_sans_affichage();
+        separation();
+        consommer_caractere(':');
+        separation();
 
         t_distance distance_gauche = recuperer_nombre_a_virgule();
 
-        consommer_caractere_sans_affichage(',');
-        separation_sans_affichage();
+        consommer_caractere(',');
+        separation();
 
         a_noeud arbre_droite = construire_arbre_phylogenetique();
-        separation_sans_affichage();
-        consommer_caractere_sans_affichage(':');
-        separation_sans_affichage();
+        separation();
+        consommer_caractere(':');
+        separation();
 
         t_distance distance_droite = recuperer_nombre_a_virgule();
-        separation_sans_affichage();
+        separation();
 
-        consommer_caractere_sans_affichage(')');
+        consommer_caractere(')');
         return nouveau_arbre_binaire(distance_gauche, distance_droite, NULL, arbre_gauche, arbre_droite, 0);
     } else {
         // on traite le cas où on a un noeud, c'est-à-dire une espèce

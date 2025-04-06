@@ -59,7 +59,7 @@ int main() {
     
     // on fait maintenant un test avec un arbre que l'on récupère de l'un des fichiers test que l'on a à notre disposition
     printf("\nArbre 3\n");
-    amorcer_lecture_sans_affichage("exemples/arbre_4.phy");
+    amorcer_lecture("exemples/arbre_4.phy");
     a_noeud arbre3 = construire_arbre_phylogenetique();
 
     if (arbre3 == NULL) {

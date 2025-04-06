@@ -13,12 +13,8 @@ int cpt = 0;
 // on lit chaque caractère du fichier
 void lire_caractere() {
 	mon_caractere = fgetc(mon_fichier);
-	printf("%c", mon_caractere);
+	// printf("%c", mon_caractere);
 	cpt++;
-}
-
-void lire_caractere_sans_affichage() {
-	mon_caractere = fgetc(mon_fichier);
 }
 
 // on ouvre le fichier à lire en mode lecture car on n'effectue pas d'écriture sur ce fichier là
@@ -26,11 +22,6 @@ void lire_caractere_sans_affichage() {
 void amorcer_lecture(char* nom_fichier){
 	mon_fichier = fopen(nom_fichier, "r");
 	lire_caractere();
-}
-
-void amorcer_lecture_sans_affichage(char* nom_fichier){
-	mon_fichier = fopen(nom_fichier, "r");
-	lire_caractere_sans_affichage();
 }
 
 // on effectue la vérification pour s'assurer que l'on obtient bien le caracrère que l'on veut en comparant le caractère prévu et celui dans le fichier
@@ -43,13 +34,6 @@ void consommer_caractere(char attendu) {
 	lire_caractere();
 }
 
-void consommer_caractere_sans_affichage(char attendu) {
-	if(mon_caractere != attendu) {
-		exit(-1);
-	}
-	lire_caractere_sans_affichage();
-}
-
 // on vérifie qu'on a bien un des caractères que l'on classifie comme séparateur là où l'on regarde
 // si cela n'est pas le cas, ça veut dire que le fichier ne suit pas notre grammaire
 int est_separateur() {
@@ -60,12 +44,6 @@ int est_separateur() {
 void separation() {
 	while(est_separateur()){
 		consommer_caractere(mon_caractere);
-	}
-}
-
-void separation_sans_affichage() {
-	while(est_separateur()){
-		consommer_caractere_sans_affichage(mon_caractere);
 	}
 }
 

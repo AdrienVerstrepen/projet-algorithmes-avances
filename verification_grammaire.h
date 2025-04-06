@@ -50,12 +50,4 @@ void nom();
 
 void arbre_phylogenetique();
 
-void lire_caractere_sans_affichage();
-
-void consommer_caractere_sans_affichage(char attendu);
-
-void separation_sans_affichage();
-
-void amorcer_lecture_sans_affichage(char* nom_fichier);
-
 #endif
