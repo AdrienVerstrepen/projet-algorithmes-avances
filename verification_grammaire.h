@@ -2,8 +2,6 @@
 #define VERIFICATION_GRAMMAIRE_H
 #include "noeud.h"
 
-// j'avais des gros soucis d'imports de fonction entre cette partie et la suite donc je me suis permis de faire ce fichier là
-// char mon_caractere;
 extern FILE* mon_fichier;
 
 void lire_caractere();
@@ -59,7 +57,5 @@ void consommer_caractere_sans_affichage(char attendu);
 void separation_sans_affichage();
 
 void amorcer_lecture_sans_affichage(char* nom_fichier);
-
-// void fermer_fichier(FILE mon_fichier);
 
 #endif

@@ -24,8 +24,6 @@ typedef t_noeud* a_noeud;
 
 void initialiser_noeud(t_noeud* ceci, char* chaine);
 
-void copier_noeud(t_noeud* ceci, t_noeud* cela);
-
 a_noeud nouveau_noeud_arbre(a_noeud gauche, a_noeud droite, t_distance distance_gauche, t_distance distance_droite);
 
 a_noeud nouveau_noeud_espece(t_nom_espece l_espece);

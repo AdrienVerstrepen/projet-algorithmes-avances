@@ -1,18 +1,24 @@
-#include <stdio.h> // pour lire le fichier
-#include <stdlib.h> // pour avoir exit();
-#include <string.h> 
-// #include "noeud.h"
-// #include "arbre_binaire.h"
-// #include "verification_grammaire.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 FILE* mon_fichier;
 char mon_caractere;
 int cpt = 0;
+
+// on aura deux types de fonction :
+// on a celles avec affichage, qui permettent de vérifier qu'un fichier donné en entré correspond bien à la grammaire
+// ces fonctions indiquent donc dans la console s'il y a un problème
+// et on a celles sans affichages, qui sont surtout utilisées dans la construction de l'arbre par la suite
 
 // on lit chaque caractère du fichier
 void lire_caractere() {
 	mon_caractere = fgetc(mon_fichier);
 	printf("%c", mon_caractere);
 	cpt++;
+}
+
+void lire_caractere_sans_affichage() {
+	mon_caractere = fgetc(mon_fichier);
 }
 
 // on ouvre le fichier à lire en mode lecture car on n'effectue pas d'écriture sur ce fichier là
@@ -22,6 +28,11 @@ void amorcer_lecture(char* nom_fichier){
 	lire_caractere();
 }
 
+void amorcer_lecture_sans_affichage(char* nom_fichier){
+	mon_fichier = fopen(nom_fichier, "r");
+	lire_caractere_sans_affichage();
+}
+
 // on effectue la vérification pour s'assurer que l'on obtient bien le caracrère que l'on veut en comparant le caractère prévu et celui dans le fichier
 void consommer_caractere(char attendu) {
 	// on traite le cas où le caractère trouvé ne correspond pas en faisant un affichage du caractère qui pose problème et en forçant un exit
@@ -29,23 +40,11 @@ void consommer_caractere(char attendu) {
 		printf("\ncaractere n %d trouve : %c, caractere attendu : %c\n", cpt, mon_caractere, attendu);
 		exit(-1);
 	}
-	// lire_caractere(mon_caractere);
 	lire_caractere();
 }
 
-void lire_caractere_sans_affichage() {
-	mon_caractere = fgetc(mon_fichier);
-}
-
-void amorcer_lecture_sans_affichage(char* nom_fichier){
-	mon_fichier = fopen(nom_fichier, "r");
-	lire_caractere_sans_affichage();
-}
-
 void consommer_caractere_sans_affichage(char attendu) {
-	// on traite le cas où le caractère trouvé ne correspond pas en faisant un affichage du caractère qui pose problème et en forçant un exit
 	if(mon_caractere != attendu) {
-		printf("\ncaractere n %d trouve : %c, caractere attendu : %c\n", cpt, mon_caractere, attendu);
 		exit(-1);
 	}
 	lire_caractere_sans_affichage();
@@ -57,6 +56,7 @@ int est_separateur() {
 	return  mon_caractere == ' ' || mon_caractere == '\t' || mon_caractere == '\n' || mon_caractere == '\r';
 }
 
+// on consomme les espaces et caractères de séparation jusqu'à ce qu'il n'y en ait plus
 void separation() {
 	while(est_separateur()){
 		consommer_caractere(mon_caractere);
@@ -69,8 +69,21 @@ void separation_sans_affichage() {
 	}
 }
 
+// on fait des fonctions qui permettent de vérifier quel type de caractère on regarde
 int est_nul() {
 	return mon_caractere == '0';
+}
+
+int est_lettre_min() {
+	return 'a' <= mon_caractere && mon_caractere <= 'z';
+}
+
+int est_lettre_maj() {
+	return 'A' <= mon_caractere && mon_caractere <= 'Z';
+}
+
+int est_lettre() {
+	return est_lettre_min() || est_lettre_maj();
 }
 
 void zero() {
@@ -94,7 +107,7 @@ void chiffre_non_nul() {
 	if (est_chiffre_non_nul()) {
 		consommer_caractere(mon_caractere);
 	} else {
-		// cas où le caractère que l'on a trouvé ne correspond pas à un caractère non nul
+		// on traite le cas où le caractère que l'on a trouvé ne correspond pas à un caractère non nul
 		printf("\nchiffre non nul attendu caractere trouve : [%c]", mon_caractere);
 		exit(-1);
 	}
@@ -111,10 +124,7 @@ void chiffre() {
 
 // si une séquence de chiffres n'est pas nulle, elle ne peut être composée que d'un ou plusieurs chiffres
 void sequence_de_chiffres() {
-	// int nombre = 1;
 	while(est_chiffre()) {
-		// nombre *= 10;
-		// nombre += mon_caractere - '0';
 		chiffre();
 	}
 }
@@ -143,18 +153,6 @@ void nombre_a_virgule() {
 	}
 }
 
-int est_lettre_min() {
-	return 'a' <= mon_caractere && mon_caractere <= 'z';
-}
-
-int est_lettre_maj() {
-	return 'A' <= mon_caractere && mon_caractere <= 'Z';
-}
-
-int est_lettre() {
-	return est_lettre_min() || est_lettre_maj();
-}
-
 // on vérifie que le caractère récupéré est bien une lettre
 void lettre() {
 	if(est_lettre()) {
@@ -180,10 +178,9 @@ void nom() {
 	}
 }
 
-// un arbre phylogénétique est composé d'un nom ou d'une combinaison de paranthèses, de : pour indiquer les distances ainsi que des noms des espèces, ce qui donne ce genre d'arbre (Homo_sapiens:0.1, Felis_catus:0.2)
+// un arbre phylogénétique est composé d'un nom ou d'une combinaison de parenthèses, de : pour indiquer les distances ainsi que des noms des espèces, ce qui donne ce genre d'arbre (Homo_sapiens:0.1, Felis_catus:0.2)
 // les arbres phylogénétiques peuvent être entièrement imbriqués
 void arbre_phylogenetique() {
-	// printf("\npassage arbre\n");
 	if (est_par_ouvr()) {
 		consommer_caractere('(');
 		arbre_phylogenetique();
@@ -203,8 +200,3 @@ void arbre_phylogenetique() {
 		nom();
 	}
 }
-
-// void fermer_fichier(mon_fichier){
-// void fermer_fichier(FILE* mon_fichier) {
-// 	fclose(mon_fichier);
-// }

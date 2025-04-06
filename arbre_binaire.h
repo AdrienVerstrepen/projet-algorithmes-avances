@@ -10,6 +10,7 @@ int est_arbre_vide(a_noeud ceci);
 a_noeud nouveau_arbre_binaire(t_distance distance_gauche, t_distance distance_droite, t_nom_espece nom_espece, a_noeud gauche, a_noeud droite, int est_espece);
 
 int hauteur_arbre_binaire(a_noeud ceci);
+
 int nb_elements_arbre_binaire(a_noeud ceci);
 
 void detruire_arbre_binaire(a_noeud ceci);
@@ -20,8 +21,12 @@ a_noeud construire_arbre_phylogenetique();
 
 void afficher_arbre(a_noeud ceci);
 
+void affichage_console(a_noeud noeud, char *prefixe, int est_droit, double distance_depuis_parent);
+
 char* recuperer_nom();
 
 double recuperer_nombre_a_virgule();
+
+void sauvegarder_arbre(FILE *fichier, a_noeud ceci);
 
 #endif

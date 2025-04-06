@@ -1,8 +1,20 @@
-all : phylo.exe 
+all : phylo.exe
 
-phylo.exe : verification_grammaire.c
-	gcc -o verification_grammaire.exe verification_grammaire.c
+phylo.exe : test_arbre.o arbre_binaire.o noeud.o verification_grammaire.o
+	gcc -o phylo.exe test_arbre.o arbre_binaire.o noeud.o verification_grammaire.o
 
-clean : verification_grammaire.o
-	rm *.o
-	rm *.exe
+test_arbre.o : test_arbre.c arbre_binaire.h noeud.h verification_grammaire.h
+	gcc -c test_arbre.c
+
+arbre_binaire.o : arbre_binaire.c arbre_binaire.h noeud.h
+	gcc -c arbre_binaire.c
+
+noeud.o : noeud.c noeud.h
+	gcc -c noeud.c
+
+verification_grammaire.o : verification_grammaire.c verification_grammaire.h
+	gcc -c verification_grammaire.c
+
+clean :
+	rm -f *.o
+	rm -f *.exe
