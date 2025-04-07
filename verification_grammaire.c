@@ -5,11 +5,6 @@ FILE* mon_fichier;
 char mon_caractere;
 int cpt = 0;
 
-// on aura deux types de fonction :
-// on a celles avec affichage, qui permettent de vérifier qu'un fichier donné en entré correspond bien à la grammaire
-// ces fonctions indiquent donc dans la console s'il y a un problème
-// et on a celles sans affichages, qui sont surtout utilisées dans la construction de l'arbre par la suite
-
 // on lit chaque caractère du fichier
 void lire_caractere() {
 	mon_caractere = fgetc(mon_fichier);

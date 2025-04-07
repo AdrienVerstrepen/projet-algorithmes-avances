@@ -1,31 +1,18 @@
-# all : phylo.exe
+all : phylo_automatise.exe phylo_interactif.exe
 
-# phylo.exe : test_arbre.o arbre_binaire.o noeud.o verification_grammaire.o
-# 	gcc -o phylo.exe test_arbre.o arbre_binaire.o noeud.o verification_grammaire.o
+# le code phylo_automatise représente la version du code où la création du fichier test est automatisé, donc où l'utilisateur ne choisit pas le nom du fichier de retour
+phylo_automatise.exe : main_automatise.o arbre_binaire.o noeud.o verification_grammaire.o
+	gcc -o phylo_automatise.exe main_automatise.o arbre_binaire.o noeud.o verification_grammaire.o
 
-# test_arbre.o : test_arbre.c arbre_binaire.h noeud.h verification_grammaire.h
-# 	gcc -c test_arbre.c
+main_automatise.o : main_automatise.c arbre_binaire.h noeud.h verification_grammaire.h
+	gcc -c main_automatise.c
 
-# arbre_binaire.o : arbre_binaire.c arbre_binaire.h noeud.h
-# 	gcc -c arbre_binaire.c
+# le code phylo_interactif représente la version du code où le nom du fichier de sortie est laissé au choix de l'utilisateur
+phylo_interactif.exe : main_interactif.o arbre_binaire.o noeud.o verification_grammaire.o
+	gcc -o phylo_interactif.exe main_interactif.o arbre_binaire.o noeud.o verification_grammaire.o
 
-# noeud.o : noeud.c noeud.h
-# 	gcc -c noeud.c
-
-# verification_grammaire.o : verification_grammaire.c verification_grammaire.h
-# 	gcc -c verification_grammaire.c
-
-# clean :
-# 	rm -f *.o
-# 	rm -f *.exe
-
-all : phylo.exe
-
-phylo.exe : main.o arbre_binaire.o noeud.o verification_grammaire.o
-	gcc -o phylo.exe main.o arbre_binaire.o noeud.o verification_grammaire.o
-
-main.o : main.c arbre_binaire.h noeud.h verification_grammaire.h
-	gcc -c main.c
+main_interactif.o : main_interactif.c arbre_binaire.h noeud.h verification_grammaire.h
+	gcc -c main_interactif.c
 
 arbre_binaire.o : arbre_binaire.c arbre_binaire.h noeud.h
 	gcc -c arbre_binaire.c

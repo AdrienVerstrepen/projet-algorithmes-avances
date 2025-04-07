@@ -73,9 +73,6 @@ int main() {
 
     printf("Hauteur de l'arbre prévue : 7\nHauteur de l'arbre : %d\n", hauteur_arbre_binaire(arbre3));
     printf("Nb éléments dans l'arbre prévu : 18\nNombre de nœuds dans l'arbre : %d\n", nb_elements_arbre_binaire(arbre3));
-
-    // on inscrit ici le nom du fichier dans lequel on veut que ce soit sauvegardé
-    // FILE *f = fopen("mon_arbre.txt", "w");
     
     // on a également pensé à coder une fonction qui va trouver automatiquement à quel "nombre de fichier arbre" on est
     // cela nous permet que le code cherche de lui-même à quel indice de fichier on s'est arrêté

@@ -4,7 +4,6 @@
 #include "noeud.h"
 
 // cette fonction permet d’initialiser un noeud
-
 void initialiser_noeud(t_noeud* ceci, char* chaine) {
     // on vérifie que le noeud n'est pas vide
     if (ceci == NULL) {

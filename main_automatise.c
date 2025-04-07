@@ -7,7 +7,9 @@
 // on appelle la fonction principale
 int main() {
 	// on indique ici le document à utiliser
-	char nom_fichier_entree[100] = "exemples/arbre_4.phy";
+	char nom_fichier_entree[100];
+	printf("Entrez le nom du fichier : ");
+	scanf("%s", nom_fichier_entree);
 
 	amorcer_lecture(nom_fichier_entree);
 	// on teste pour vérifier si l'arbre dans le fichier suit bien la grammaire
