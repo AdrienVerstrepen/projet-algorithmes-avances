@@ -11,6 +11,19 @@ int main() {
 	printf("Entrez le nom du fichier : ");
 	scanf("%s", nom_fichier_entree);
 
+    // on vérifie que le fichier donné en entré existe et qu'il n'est pas vide
+    FILE *fichier_test = fopen(nom_fichier_entree, "r");
+    if (fichier_test == NULL) {
+        printf("Erreur : impossible d’ouvrir le fichier.\nAssurez vous que le chemin de votre fichier est bien correct.\n");
+        return 1;
+    }
+    if (fgetc(fichier_test) == EOF) {
+        printf("Le fichier est vide.\n");
+        fclose(fichier_test);
+        return 1;
+    }
+    fclose(fichier_test);
+
 	amorcer_lecture(nom_fichier_entree);
 	// on teste pour vérifier si l'arbre dans le fichier suit bien la grammaire
 	arbre_phylogenetique();
