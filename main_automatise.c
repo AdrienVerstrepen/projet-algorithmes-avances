@@ -11,6 +11,18 @@ int main() {
 	printf("Entrez le nom du fichier : ");
 	scanf("%s", nom_fichier_entree);
 
+    FILE *fichier_test = fopen(nom_fichier_entree, "r");
+    if (fichier_test == NULL) {
+        printf("Erreur : impossible d’ouvrir le fichier.\nAssurez vous que le chemin de votre fichier est bien correct.\n");
+        return 1;
+    }
+    if (fgetc(fichier_test) == EOF) {
+        printf("Le fichier est vide.\n");
+        fclose(fichier_test);
+        return 1;
+    }
+    fclose(fichier_test);
+
 	amorcer_lecture(nom_fichier_entree);
 	// on teste pour vérifier si l'arbre dans le fichier suit bien la grammaire
 	arbre_phylogenetique();
@@ -30,12 +42,13 @@ int main() {
     // on a également pensé à coder une fonction qui va trouver automatiquement à quel "nombre de fichier arbre" on est
     // cela nous permet que le code cherche de lui-même à quel indice de fichier on s'est arrêté
     // on écrit nos fichiers de retour sous la forme de "arbre{nombre}.txt" et au lieu de changer nous-mêmes le chffre, le code le fait automatiquement en cherchant quel nom de fichier n'existe pas encore
+    // les documents seront mis automatiquement dans le dossier résultats
     int numero = 1;
     char nom_fichier[100];
     FILE *fichier = NULL;
 
     while (1) {
-        sprintf(nom_fichier, "arbre%d.txt", numero);
+        sprintf(nom_fichier, "résultats/arbre%d.txt", numero);
         fichier = fopen(nom_fichier, "r");
         if (fichier == NULL) {
             break;
